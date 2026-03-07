@@ -1,1 +1,4 @@
 project_id = "lafqcrqowrzngbqesksb"
+
+[functions.analyze-bias]
+verify_jwt = false
