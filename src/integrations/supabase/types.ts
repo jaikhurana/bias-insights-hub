@@ -14,7 +14,145 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bias_analyses: {
+        Row: {
+          biases: Json
+          created_at: string
+          debate_against: string[]
+          debate_for: string[]
+          id: string
+          opinion_id: string
+          perspectives: Json
+        }
+        Insert: {
+          biases?: Json
+          created_at?: string
+          debate_against?: string[]
+          debate_for?: string[]
+          id?: string
+          opinion_id: string
+          perspectives?: Json
+        }
+        Update: {
+          biases?: Json
+          created_at?: string
+          debate_against?: string[]
+          debate_for?: string[]
+          id?: string
+          opinion_id?: string
+          perspectives?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bias_analyses_opinion_id_fkey"
+            columns: ["opinion_id"]
+            isOneToOne: false
+            referencedRelation: "opinions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cases: {
+        Row: {
+          created_at: string
+          description: string
+          document_url: string | null
+          id: string
+          industry: string | null
+          opinion_count: number
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          document_url?: string | null
+          id?: string
+          industry?: string | null
+          opinion_count?: number
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          document_url?: string | null
+          id?: string
+          industry?: string | null
+          opinion_count?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      opinions: {
+        Row: {
+          case_id: string
+          content: string
+          created_at: string
+          id: string
+          stance: string | null
+          user_id: string
+        }
+        Insert: {
+          case_id: string
+          content: string
+          created_at?: string
+          id?: string
+          stance?: string | null
+          user_id: string
+        }
+        Update: {
+          case_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          stance?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "opinions_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
